@@ -13,7 +13,7 @@ body {
   padding: 0 1rem;
 }
 
-/* Header */
+
 header {
   background-color: #007f7f;
   color: white;
@@ -32,7 +32,7 @@ header {
   }
 }
 
-/* Contenedor principal */
+
 .contenedor {
   max-width: 960px;
   margin: 0 auto 2rem auto;
@@ -43,7 +43,7 @@ header {
   flex-wrap: wrap;
 }
 
-/* Formulario y listado, columnas flexibles */
+
 .formulario, .listado {
   background-color: white;
   padding: 1.5rem;
@@ -53,7 +53,7 @@ header {
   min-width: 300px;
 }
 
-/* Titulos de secciones */
+
 h2 {
   margin-bottom: 1rem;
   color: #005f5f;
@@ -62,7 +62,7 @@ h2 {
   text-align: center;
 }
 
-/* Inputs y selects */
+
 form input[type="text"],
 form input[type="tel"],
 form input[type="date"],
@@ -92,12 +92,12 @@ form textarea:focus {
   outline: none;
 }
 
-/* Textarea con altura mínima */
+
 textarea {
   min-height: 80px;
 }
 
-/* Botón enviar */
+
 form button[type="submit"] {
   width: 100%;
   background-color: #007f7f;
@@ -115,11 +115,11 @@ form button[type="submit"]:hover {
   background-color: #005f5f;
 }
 
-/* Lista de eventos */
+
 #lista-eventos {
-  max-height: 500px;
-  overflow-y: auto;
-  padding-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 #lista-eventos p {
@@ -128,10 +128,13 @@ form button[type="submit"]:hover {
   font-style: italic;
 }
 
-/* Cada evento */
+
 .evento {
-  border-bottom: 1px solid #e2e2e2;
-  padding: 1rem 0;
+  background-color: #fdfdfd;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .evento:last-child {
@@ -149,7 +152,7 @@ form button[type="submit"]:hover {
   color: #444;
 }
 
-/* Botones editar y eliminar */
+
 .acciones {
   margin-top: 0.8rem;
   display: flex;
@@ -185,7 +188,7 @@ form button[type="submit"]:hover {
   background-color: #990000;
 }
 
-/* Responsive: móviles y tablets */
+
 @media (max-width: 900px) {
   .contenedor {
     flex-direction: column;
@@ -216,16 +219,10 @@ form button[type="submit"]:hover {
   }
 }
 
-/* Scrollbar para lista de eventos (opcional) */
-#lista-eventos::-webkit-scrollbar {
-  width: 8px;
+.btn-factura {
+  background-color: #ffa500;
+  color: white;
 }
-
-#lista-eventos::-webkit-scrollbar-thumb {
-  background-color: #007f7f;
-  border-radius: 4px;
-}
-
-#lista-eventos::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.btn-factura:hover {
+  background-color: #cc8400;
 }

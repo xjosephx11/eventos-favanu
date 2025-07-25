@@ -236,7 +236,7 @@ import { Mensaje } from "./modal.js";
 
 const formulario = document.querySelector("#formulario-evento");
 const inputs = formulario.querySelectorAll("input, select, textarea");
-const btnSubmit = formulario.querySelector("#formulario-evento button[type='submit']");
+const btnSubmit = formulario.querySelector("button[type='submit']");
 
 let editando = false;
 let idEdicion = null;
@@ -284,7 +284,6 @@ formulario.addEventListener("submit", e => {
     (!editando || ev.id !== idEdicion) 
   );
 
-
   const camposRequeridos = ["nombre", "cliente", "telefono", "fecha", "hora", "tipo", "personas", "costo", "estado", "metodoPago"];
   for (const campo of camposRequeridos) {
     if (!eventoTemp[campo] || eventoTemp[campo].trim() === "") {
@@ -294,6 +293,13 @@ formulario.addEventListener("submit", e => {
   }
 
   if (editando) {
+    // Aplica el 13% al costo antes de editar
+    const costoBase = parseFloat(eventoTemp.costo);
+    if (!isNaN(costoBase)) {
+      const costoConImpuesto = costoBase * 1.13;
+      eventoTemp.costo = costoConImpuesto.toFixed(2);
+    }
+
     const eventoEditado = new Evento({ ...eventoTemp, id: idEdicion });
     adminEventos.editar(eventoEditado);
     new Mensaje({ texto: "Evento actualizado correctamente", tipo: "exito" });
@@ -301,6 +307,13 @@ formulario.addEventListener("submit", e => {
     editando = false;
     idEdicion = null;
   } else {
+    // Aplica el 13% al costo al agregar
+    const costoBase = parseFloat(eventoTemp.costo);
+    if (!isNaN(costoBase)) {
+      const costoConImpuesto = costoBase * 1.13;
+      eventoTemp.costo = costoConImpuesto.toFixed(2);
+    }
+
     const nuevoEvento = new Evento(eventoTemp);
     adminEventos.agregar(nuevoEvento);
     new Mensaje({ texto: "Evento agregado correctamente", tipo: "exito" });
@@ -317,22 +330,8 @@ function cargarEdicion(evento) {
   btnSubmit.textContent = "Guardar Cambios";
 
   Object.entries(evento).forEach(([key, val]) => {
-    if (formulario[key]) formulario[key].value = val;
+    const input = formulario.elements[key];
+    if (input) input.value = val;
     eventoTemp[key] = val;
-  });
-
-  
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service-worker.js')  // << este slash es muy importante
-      .then(reg => {
-        console.log('Service Worker registrado', reg);
-      })
-      .catch(err => {
-        console.error('Error al registrar el Service Worker', err);
-      });
   });
 }
