@@ -22,13 +22,14 @@ header {
   border-radius: 8px;
   margin-bottom: 25px;
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   letter-spacing: 1px;
 }
 
 /* Contenedor principal */
 .contenedor {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
@@ -41,6 +42,7 @@ header {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  min-width: 300px;
 }
 
 .formulario h2 {
@@ -86,6 +88,7 @@ header {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  min-width: 300px;
 }
 
 .listado h2 {
@@ -212,8 +215,8 @@ footer {
   }
 
   header {
-    font-size: 1.3rem;
-    padding: 12px 10px;
+    font-size: 1.2rem;
+    padding: 12px;
   }
 
   .formulario, .listado {
