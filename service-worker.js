@@ -34,8 +34,15 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request);
+    fetch(e.request).then(response => {
+      // Actualiza la caché con la última versión
+      return caches.open(CACHE_NAME).then(cache => {
+        cache.put(e.request, response.clone());
+        return response;
+      });
+    }).catch(() => {
+      // Si falla la red, usa la caché
+      return caches.match(e.request);
     })
   );
 });
